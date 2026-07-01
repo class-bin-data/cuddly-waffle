@@ -180,7 +180,7 @@
             border-radius: 60px;
             padding: 12px 18px 12px 24px;
             margin: 16px 0 22px;
-            display: flex;
+            display: none; /* 默认隐藏，确认后显示 */
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
@@ -188,6 +188,10 @@
             border: 1px solid #d3c0b0;
             box-shadow: inset 0 1px 6px rgba(80, 60, 45, 0.1);
             transition: all 0.3s ease;
+        }
+
+        .secret-area.show {
+            display: flex;
         }
 
         .secret-area .label {
@@ -407,12 +411,12 @@
         </div>
     </div>
 
-    <!-- 密码提示区（未确认时可见密码，但相册链接隐藏） -->
-    <div class="secret-area">
+    <!-- 密码显示区（初始隐藏，确认后显示） -->
+    <div class="secret-area" id="secretArea">
         <span class="label"><span>🔐 访问密码</span> <i>相册专用</i></span>
         <span class="secret-code">WCBZG-5ms55</span>
     </div>
-    <div class="secret-hint">⬇️ 阅读并确认协议后，下方将显示相册入口</div>
+    <div class="secret-hint" id="hintText">⬇️ 阅读并确认协议后，下方将显示相册密码与入口</div>
 
     <!-- 确认按钮 -->
     <button class="btn-confirm" id="confirmBtn">✅ 我已阅读并确认</button>
@@ -443,43 +447,47 @@
     (function() {
         const confirmBtn = document.getElementById('confirmBtn');
         const albumAccess = document.getElementById('albumAccess');
+        const secretArea = document.getElementById('secretArea');
+        const hintText = document.getElementById('hintText');
 
         // 检查是否已经确认过（使用 sessionStorage 避免刷新后重复显示，但保留协议可见）
         const alreadyConfirmed = sessionStorage.getItem('albumConfirmed') === 'true';
 
-        // 如果已经确认过，直接显示相册入口，并改变按钮状态
+        // 如果已经确认过，直接显示相册入口和密码区，并改变按钮状态
         if (alreadyConfirmed) {
             albumAccess.classList.add('show');
+            secretArea.classList.add('show');
+            hintText.textContent = '🔓 相册已解锁，密码与入口如下';
             confirmBtn.disabled = true;
             confirmBtn.textContent = '✅ 已确认 · 相册已解锁';
         }
 
         // 点击确认按钮
         confirmBtn.addEventListener('click', function() {
-            // 防止重复点击导致多次触发
             if (this.disabled) return;
 
-            // 显示相册区域
+            // 显示密码区和相册区域
+            secretArea.classList.add('show');
             albumAccess.classList.add('show');
+            hintText.textContent = '🔓 相册已解锁，密码与入口如下';
 
             // 禁用按钮，改变文字
             this.disabled = true;
             this.textContent = '✅ 已确认 · 相册已解锁';
 
-            // 存入 sessionStorage，刷新页面后仍然保持解锁状态 (直到关闭标签页)
+            // 存入 sessionStorage
             sessionStorage.setItem('albumConfirmed', 'true');
 
-            // 可选：平滑滚动到相册入口
+            // 平滑滚动到相册入口
             setTimeout(() => {
                 albumAccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 200);
         });
 
-        // 附加：点击相册链接时，二次提醒（但不会阻止跳转）
+        // 点击相册链接时二次提醒
         const albumLink = document.querySelector('.album-access .link-row a');
         if (albumLink) {
             albumLink.addEventListener('click', function(e) {
-                // 仅做提醒，不阻止跳转
                 const userConfirmed = confirm('📢 提醒：转发相册或密码前，请务必确保对方已知悉“肖像权保护声明”。\n你确定要继续访问吗？');
                 if (!userConfirmed) {
                     e.preventDefault();
@@ -487,7 +495,7 @@
             });
         }
 
-        // 键盘可访问性优化——回车触发按钮
+        // 键盘可访问性优化
         confirmBtn.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
