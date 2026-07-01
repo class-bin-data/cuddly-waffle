@@ -216,17 +216,19 @@
             pointer-events: none;
         }
 
-        .album-access {
+        /* 密码显示区域 - 只显示密码，无链接 */
+        .password-access {
             margin-top: 25px;
-            padding: 18px 18px 14px;
+            padding: 22px 24px 20px;
             background: #f5eee9;
             border-radius: 28px;
             border: 1px solid #dccfc4;
             display: none;
             animation: fadeSlide 0.4s ease;
+            text-align: center;
         }
 
-        .album-access.show {
+        .password-access.show {
             display: block;
         }
 
@@ -235,73 +237,54 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
-        .album-access .link-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background: white;
-            padding: 10px 16px 10px 20px;
-            border-radius: 60px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        .password-access .pwd-label {
+            font-size: 0.95rem;
+            color: #5d4b3d;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
         }
 
-        .album-access .link-row a {
-            color: #4f3a2c;
-            font-weight: 500;
-            text-decoration: none;
-            word-break: break-all;
-            font-size: 0.9rem;
-            border-bottom: 1px dashed #b7a392;
-        }
-
-        .album-access .link-row .copy-badge {
-            background: #dacfc4;
-            padding: 4px 14px;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            color: #3e2e24;
-            white-space: nowrap;
-        }
-
-        .album-access .pwd-display {
-            margin-top: 14px;
-            background: #e3d5c9;
-            border-radius: 60px;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 6px 12px;
-        }
-
-        .album-access .pwd-display strong {
-            color: #37271e;
-            font-weight: 500;
-        }
-
-        .album-access .pwd-display .pwd-value {
+        .password-access .pwd-value {
             background: #fefaf5;
-            padding: 6px 26px;
+            padding: 14px 30px;
             border-radius: 60px;
             font-family: 'Courier New', monospace;
             font-weight: 700;
-            letter-spacing: 4px;
-            font-size: 1.3rem;
+            letter-spacing: 6px;
+            font-size: 1.6rem;
             color: #1e130e;
             box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+            display: inline-block;
+            border: 2px solid #d3c0b0;
         }
 
-        .album-access .warning-reminder {
-            margin-top: 12px;
+        .password-access .pwd-hint {
+            margin-top: 14px;
             font-size: 0.8rem;
-            color: #5f4d3d;
-            text-align: center;
+            color: #7b6a5d;
             background: #ede3da;
-            padding: 6px 12px;
+            padding: 8px 16px;
             border-radius: 80px;
+            display: inline-block;
+        }
+
+        .password-access .divider-line {
+            margin: 16px 0 10px;
+            border-top: 1px dashed #dacfc4;
+        }
+
+        .password-access .manual-link-note {
+            font-size: 0.85rem;
+            color: #6f5b4b;
+        }
+
+        .password-access .manual-link-note code {
+            background: #e7dbd0;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            word-break: break-all;
+            color: #3e2e24;
         }
 
         .footnote {
@@ -318,7 +301,7 @@
             .card { padding: 24px 16px 24px; }
             h1 { font-size: 1.7rem; }
             .protocol { padding: 18px 14px; }
-            .album-access .link-row { flex-direction: column; align-items: flex-start; }
+            .password-access .pwd-value { font-size: 1.2rem; padding: 12px 20px; letter-spacing: 4px; }
         }
     </style>
 </head>
@@ -355,31 +338,26 @@
                 <p><strong>本人不承担任何因照片滥用、盗用、恶搞引发的法律及心理伤害责任。</strong> 如有纠纷，请直接追究行为人，本人将配合提供必要日志，但绝不代为受过。</p>
             </div>
 
-            <p style="margin-top: 6px; font-size: 0.9rem; color: #5d4b3d;"><strong>📌 转发/告知义务：</strong> 向他人转发相册链接或密码前，<strong>必须</strong>确保对方已知悉本协议全部内容。</p>
+            <p style="margin-top: 6px; font-size: 0.9rem; color: #5d4b3d;"><strong>📌 转发/告知义务：</strong> 向他人转发相册密码前，<strong>必须</strong>确保对方已知悉本协议全部内容。</p>
         </div>
     </div>
 
     <!-- 提示文字 -->
-    <div class="hint-text" id="hintText">⬇️ 阅读并确认协议后，下方将显示相册链接与密码</div>
+    <div class="hint-text" id="hintText">⬇️ 阅读并确认协议后，下方将显示相册密码</div>
 
     <!-- 确认按钮 -->
     <button class="btn-confirm" id="confirmBtn">✅ 我已阅读并确认</button>
 
-    <!-- 相册链接 + 密码（仅此处显示一次，初始隐藏） -->
-    <div class="album-access" id="albumAccess">
-        <div class="link-row">
-            <a href="https://user.qzone.qq.com/263175043/photo/V54HDqQZ0TLkbt14fSkx383XqP1w4tLJ/" target="_blank" rel="noopener noreferrer">
-                📂 点击进入班级相册
-            </a>
-            <span class="copy-badge">QQ空间</span>
+    <!-- 密码显示区域（仅显示密码，无链接，初始隐藏） -->
+    <div class="password-access" id="passwordAccess">
+        <div class="pwd-label">🔑 相册访问密码</div>
+        <div class="pwd-value">WCBZG-5ms55</div>
+        <div class="divider-line"></div>
+        <div class="manual-link-note">
+            📂 请复制密码后，在QQ空间手动搜索相册<br>
+            <span style="font-size:0.8rem; color:#9b8a7c;">（链接已隐藏，仅限协议确认者获取密码）</span>
         </div>
-        <div class="pwd-display">
-            <strong>🔑 密码</strong>
-            <span class="pwd-value">WCBZG-5ms55</span>
-        </div>
-        <div class="warning-reminder">
-            ⚠️ 转发前请务必告知对方遵守本协议
-        </div>
+        <div class="pwd-hint">⚠️ 转发密码前请务必告知对方遵守本协议</div>
     </div>
 
     <div class="footnote">
@@ -390,44 +368,34 @@
 <script>
     (function() {
         const confirmBtn = document.getElementById('confirmBtn');
-        const albumAccess = document.getElementById('albumAccess');
+        const passwordAccess = document.getElementById('passwordAccess');
         const hintText = document.getElementById('hintText');
 
         // 检查是否已经确认过
         const alreadyConfirmed = sessionStorage.getItem('albumConfirmed') === 'true';
 
         if (alreadyConfirmed) {
-            albumAccess.classList.add('show');
-            hintText.textContent = '🔓 相册已解锁，链接与密码如下';
+            passwordAccess.classList.add('show');
+            hintText.textContent = '🔓 密码已解锁，请复制使用';
             confirmBtn.disabled = true;
-            confirmBtn.textContent = '✅ 已确认 · 相册已解锁';
+            confirmBtn.textContent = '✅ 已确认 · 密码已解锁';
         }
 
         confirmBtn.addEventListener('click', function() {
             if (this.disabled) return;
 
-            albumAccess.classList.add('show');
-            hintText.textContent = '🔓 相册已解锁，链接与密码如下';
+            passwordAccess.classList.add('show');
+            hintText.textContent = '🔓 密码已解锁，请复制使用';
 
             this.disabled = true;
-            this.textContent = '✅ 已确认 · 相册已解锁';
+            this.textContent = '✅ 已确认 · 密码已解锁';
 
             sessionStorage.setItem('albumConfirmed', 'true');
 
             setTimeout(() => {
-                albumAccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                passwordAccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 200);
         });
-
-        const albumLink = document.querySelector('.album-access .link-row a');
-        if (albumLink) {
-            albumLink.addEventListener('click', function(e) {
-                const userConfirmed = confirm('📢 提醒：转发相册或密码前，请务必确保对方已知悉"肖像权保护声明"。\n你确定要继续访问吗？');
-                if (!userConfirmed) {
-                    e.preventDefault();
-                }
-            });
-        }
 
         confirmBtn.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
