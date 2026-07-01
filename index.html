@@ -34,7 +34,6 @@
             border: 1px solid rgba(255, 235, 220, 0.5);
         }
 
-        /* 装饰头 */
         .header-icon {
             text-align: center;
             margin-bottom: 16px;
@@ -83,7 +82,6 @@
             letter-spacing: 1px;
         }
 
-        /* 协议正文 ———— 优雅且庄重 */
         .protocol {
             background: #fdfaf7;
             padding: 24px 22px;
@@ -174,67 +172,17 @@
             font-size: 0.95rem;
         }
 
-        /* 密码显示区（初始隐藏） */
-        .secret-area {
-            background: #e7dbd0;
-            border-radius: 60px;
-            padding: 12px 18px 12px 24px;
-            margin: 16px 0 22px;
-            display: none; /* 默认隐藏，确认后显示 */
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px 12px;
-            border: 1px solid #d3c0b0;
-            box-shadow: inset 0 1px 6px rgba(80, 60, 45, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .secret-area.show {
-            display: flex;
-        }
-
-        .secret-area .label {
-            font-weight: 500;
-            color: #3f2f26;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .secret-area .label i {
-            font-style: normal;
-            background: #5f4b3b;
-            color: #f5ede6;
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-        }
-
-        .secret-code {
-            background: #fcf6f0;
-            padding: 8px 20px;
-            border-radius: 80px;
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            color: #2d1d12;
-            box-shadow: inset 0 0 0 1px #dacbc0;
-            word-break: break-all;
-            text-align: center;
-        }
-
-        .secret-hint {
-            font-size: 0.8rem;
+        .hint-text {
+            font-size: 0.9rem;
             color: #6f5b4b;
-            margin-top: 6px;
+            margin: 12px 0 16px;
             text-align: center;
+            background: #f3ece6;
+            padding: 10px 16px;
+            border-radius: 60px;
+            border: 1px dashed #cbb9ab;
         }
 
-        /* 按钮 */
         .btn-confirm {
             display: block;
             width: 100%;
@@ -268,14 +216,13 @@
             pointer-events: none;
         }
 
-        /* 相册链接 + 密码 (初始隐藏) */
         .album-access {
             margin-top: 25px;
             padding: 18px 18px 14px;
             background: #f5eee9;
             border-radius: 28px;
             border: 1px solid #dccfc4;
-            display: none; /* 默认隐藏 */
+            display: none;
             animation: fadeSlide 0.4s ease;
         }
 
@@ -347,6 +294,16 @@
             box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
         }
 
+        .album-access .warning-reminder {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #5f4d3d;
+            text-align: center;
+            background: #ede3da;
+            padding: 6px 12px;
+            border-radius: 80px;
+        }
+
         .footnote {
             margin-top: 28px;
             font-size: 0.75rem;
@@ -357,19 +314,10 @@
             letter-spacing: 0.5px;
         }
 
-        .footnote a {
-            color: #7b6251;
-            text-decoration: none;
-            border-bottom: 1px dotted #bba999;
-        }
-
-        /* 响应式调整 */
         @media (max-width: 480px) {
             .card { padding: 24px 16px 24px; }
             h1 { font-size: 1.7rem; }
             .protocol { padding: 18px 14px; }
-            .secret-area { flex-direction: column; align-items: flex-start; }
-            .secret-code { width: 100%; text-align: center; }
             .album-access .link-row { flex-direction: column; align-items: flex-start; }
         }
     </style>
@@ -393,7 +341,7 @@
             <p><strong>致全体同学及转发者：</strong> 本相册为初三毕业纪念合集，包含集体照及个人特写。凡浏览、保存或转发相册内容者，<strong>视为已阅读并同意</strong>以下条款。</p>
 
             <ul>
-                <li><strong>严禁盗用、P图及制作表情包：</strong> 禁止以任何形式（抠图、合成、添加文字等）处理<strong>非本人</strong>的照片。即使出于“玩笑”，也必须获得照片中<strong>所有出镜人</strong>的明确授权。</li>
+                <li><strong>严禁盗用、P图及制作表情包：</strong> 禁止以任何形式（抠图、合成、添加文字等）处理<strong>非本人</strong>的照片。即使出于"玩笑"，也必须获得照片中<strong>所有出镜人</strong>的明确授权。</li>
                 <li><strong>肖像权与责任归属：</strong> 本人（相册整理者）仅提供分享平台，<strong>不承担</strong>因照片滥用、恶搞、传播引发的任何法律责任或纠纷。一切后果由<strong>实际制作者（行为人）</strong>自行承担。</li>
                 <li><strong>删除/撤回权利：</strong> 若您不希望某张照片公开，请 <strong>私聊联系我</strong> 并指明照片，我将在 24 小时内处理。逾期未联系则视为默认同意展示。</li>
             </ul>
@@ -411,12 +359,13 @@
         </div>
     </div>
 
-    <div class="secret-hint" id="hintText">⬇️ 阅读并确认协议后，下方将显示相册密码与入口</div>
+    <!-- 提示文字 -->
+    <div class="hint-text" id="hintText">⬇️ 阅读并确认协议后，下方将显示相册链接与密码</div>
 
     <!-- 确认按钮 -->
     <button class="btn-confirm" id="confirmBtn">✅ 我已阅读并确认</button>
 
-    <!-- 相册链接 + 密码 (初始隐藏) -->
+    <!-- 相册链接 + 密码（仅此处显示一次，初始隐藏） -->
     <div class="album-access" id="albumAccess">
         <div class="link-row">
             <a href="https://user.qzone.qq.com/263175043/photo/V54HDqQZ0TLkbt14fSkx383XqP1w4tLJ/" target="_blank" rel="noopener noreferrer">
@@ -428,7 +377,7 @@
             <strong>🔑 密码</strong>
             <span class="pwd-value">WCBZG-5ms55</span>
         </div>
-        <div style="margin-top: 12px; font-size: 0.8rem; color: #5f4d3d; text-align: center; background: #ede3da; padding: 6px 12px; border-radius: 80px;">
+        <div class="warning-reminder">
             ⚠️ 转发前请务必告知对方遵守本协议
         </div>
     </div>
@@ -442,55 +391,44 @@
     (function() {
         const confirmBtn = document.getElementById('confirmBtn');
         const albumAccess = document.getElementById('albumAccess');
-        const secretArea = document.getElementById('secretArea');
         const hintText = document.getElementById('hintText');
 
-        // 检查是否已经确认过（使用 sessionStorage 避免刷新后重复显示，但保留协议可见）
+        // 检查是否已经确认过
         const alreadyConfirmed = sessionStorage.getItem('albumConfirmed') === 'true';
 
-        // 如果已经确认过，直接显示相册入口和密码区，并改变按钮状态
         if (alreadyConfirmed) {
             albumAccess.classList.add('show');
-            secretArea.classList.add('show');
-            hintText.textContent = '🔓 相册已解锁，密码与入口如下';
+            hintText.textContent = '🔓 相册已解锁，链接与密码如下';
             confirmBtn.disabled = true;
             confirmBtn.textContent = '✅ 已确认 · 相册已解锁';
         }
 
-        // 点击确认按钮
         confirmBtn.addEventListener('click', function() {
             if (this.disabled) return;
 
-            // 显示密码区和相册区域
-            secretArea.classList.add('show');
             albumAccess.classList.add('show');
-            hintText.textContent = '🔓 相册已解锁，密码与入口如下';
+            hintText.textContent = '🔓 相册已解锁，链接与密码如下';
 
-            // 禁用按钮，改变文字
             this.disabled = true;
             this.textContent = '✅ 已确认 · 相册已解锁';
 
-            // 存入 sessionStorage
             sessionStorage.setItem('albumConfirmed', 'true');
 
-            // 平滑滚动到相册入口
             setTimeout(() => {
                 albumAccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 200);
         });
 
-        // 点击相册链接时二次提醒
         const albumLink = document.querySelector('.album-access .link-row a');
         if (albumLink) {
             albumLink.addEventListener('click', function(e) {
-                const userConfirmed = confirm('📢 提醒：转发相册或密码前，请务必确保对方已知悉“肖像权保护声明”。\n你确定要继续访问吗？');
+                const userConfirmed = confirm('📢 提醒：转发相册或密码前，请务必确保对方已知悉"肖像权保护声明"。\n你确定要继续访问吗？');
                 if (!userConfirmed) {
                     e.preventDefault();
                 }
             });
         }
 
-        // 键盘可访问性优化
         confirmBtn.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
