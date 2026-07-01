@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>初三毕业班级相册 · 协议确认</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f7f3f0 0%, #e8e0da 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 250, 245, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.08);
+            padding: 36px 28px 32px;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 235, 220, 0.5);
+        }
+
+        /* 装饰头 */
+        .header-icon {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .header-icon span {
+            background: #d6c4b4;
+            padding: 8px 18px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            color: #4d3e35;
+            letter-spacing: 2px;
+            background: #e7d9cf;
+            box-shadow: inset 0 1px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        h1 {
+            font-size: 2.1rem;
+            font-weight: 600;
+            color: #3e2e26;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #7b6a5d;
+            font-size: 0.95rem;
+            border-bottom: 2px dashed #dacfc6;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+            font-weight: 400;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+        }
+        .subhead .badge {
+            background: #b7a392;
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* 协议正文 ———— 优雅且庄重 */
+        .protocol {
+            background: #fdfaf7;
+            padding: 24px 22px;
+            border-radius: 28px;
+            box-shadow: inset 0 2px 8px rgba(140, 110, 90, 0.06), 0 4px 12px rgba(0,0,0,0.02);
+            border: 1px solid #efe6de;
+            margin-bottom: 28px;
+        }
+
+        .protocol h2 {
+            font-size: 1.1rem;
+            color: #4d3529;
+            border-left: 6px solid #b29b8a;
+            padding-left: 14px;
+            margin: 0 0 18px 0;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .protocol-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #2f241e;
+        }
+
+        .protocol-content p {
+            margin-bottom: 14px;
+            text-indent: 0em;
+        }
+
+        .protocol-content strong {
+            color: #6a4c38;
+            font-weight: 600;
+        }
+
+        .protocol-content .highlight-box {
+            background: #f3ede8;
+            border-radius: 16px;
+            padding: 12px 18px;
+            margin: 18px 0 16px;
+            border-left: 4px solid #b48d74;
+            font-size: 0.95rem;
+        }
+
+        .protocol-content ul {
+            margin: 10px 0 16px 20px;
+            list-style: none;
+        }
+
+        .protocol-content ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .protocol-content ul li::before {
+            content: "•";
+            color: #a5836b;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -4px;
+        }
+
+        .protocol-content .legal-warning {
+            background: #f7efe8;
+            border-radius: 20px;
+            padding: 18px 18px 14px;
+            margin: 22px 0 14px;
+            text-align: center;
+            border: 1px solid #dccfc4;
+        }
+
+        .protocol-content .legal-warning span {
+            display: inline-block;
+            background: #4d3529;
+            color: #fef6ef;
+            font-weight: 600;
+            padding: 2px 18px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .protocol-content .legal-warning p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* 密码显示区（初始隐藏） */
+        .secret-area {
+            background: #e7dbd0;
+            border-radius: 60px;
+            padding: 12px 18px 12px 24px;
+            margin: 16px 0 22px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px 12px;
+            border: 1px solid #d3c0b0;
+            box-shadow: inset 0 1px 6px rgba(80, 60, 45, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .secret-area .label {
+            font-weight: 500;
+            color: #3f2f26;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .secret-area .label i {
+            font-style: normal;
+            background: #5f4b3b;
+            color: #f5ede6;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+        }
+
+        .secret-code {
+            background: #fcf6f0;
+            padding: 8px 20px;
+            border-radius: 80px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            color: #2d1d12;
+            box-shadow: inset 0 0 0 1px #dacbc0;
+            word-break: break-all;
+            text-align: center;
+        }
+
+        .secret-hint {
+            font-size: 0.8rem;
+            color: #6f5b4b;
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        /* 按钮 */
+        .btn-confirm {
+            display: block;
+            width: 100%;
+            padding: 18px 14px;
+            background: #4d3529;
+            border: none;
+            border-radius: 60px;
+            color: #fcf3eb;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 20px -8px rgba(60, 40, 30, 0.3);
+            border: 1px solid #6a4f3d;
+            margin-top: 6px;
+        }
+
+        .btn-confirm:active {
+            transform: scale(0.97);
+            background: #3b2b20;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn-confirm:disabled {
+            opacity: 0.4;
+            filter: grayscale(0.3);
+            transform: none;
+            box-shadow: none;
+            background: #7e6b5d;
+            pointer-events: none;
+        }
+
+        /* 相册链接 + 密码 (初始隐藏) */
+        .album-access {
+            margin-top: 25px;
+            padding: 18px 18px 14px;
+            background: #f5eee9;
+            border-radius: 28px;
+            border: 1px solid #dccfc4;
+            display: none; /* 默认隐藏 */
+            animation: fadeSlide 0.4s ease;
+        }
+
+        .album-access.show {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .album-access .link-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: white;
+            padding: 10px 16px 10px 20px;
+            border-radius: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .album-access .link-row a {
+            color: #4f3a2c;
+            font-weight: 500;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.9rem;
+            border-bottom: 1px dashed #b7a392;
+        }
+
+        .album-access .link-row .copy-badge {
+            background: #dacfc4;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #3e2e24;
+            white-space: nowrap;
+        }
+
+        .album-access .pwd-display {
+            margin-top: 14px;
+            background: #e3d5c9;
+            border-radius: 60px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px 12px;
+        }
+
+        .album-access .pwd-display strong {
+            color: #37271e;
+            font-weight: 500;
+        }
+
+        .album-access .pwd-display .pwd-value {
+            background: #fefaf5;
+            padding: 6px 26px;
+            border-radius: 60px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-size: 1.3rem;
+            color: #1e130e;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
+        }
+
+        .footnote {
+            margin-top: 28px;
+            font-size: 0.75rem;
+            color: #9b8a7c;
+            text-align: center;
+            border-top: 1px solid #e3d6cb;
+            padding-top: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .footnote a {
+            color: #7b6251;
+            text-decoration: none;
+            border-bottom: 1px dotted #bba999;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .card { padding: 24px 16px 24px; }
+            h1 { font-size: 1.7rem; }
+            .protocol { padding: 18px 14px; }
+            .secret-area { flex-direction: column; align-items: flex-start; }
+            .secret-code { width: 100%; text-align: center; }
+            .album-access .link-row { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <div class="header-icon"><span>📸 青春 · 2026</span></div>
+    <h1>初三毕业班级相册</h1>
+    <div class="subhead">
+        <span>❤️ 珍藏回忆 · 互相尊重</span>
+        <span class="badge">协议先行</span>
+    </div>
+
+    <!-- 协议正文 -->
+    <div class="protocol">
+        <h2>📋 相册使用及肖像权保护声明</h2>
+        <div class="protocol-content">
+
+            <p><strong>致全体同学及转发者：</strong> 本相册为初三毕业纪念合集，包含集体照及个人特写。凡浏览、保存或转发相册内容者，<strong>视为已阅读并同意</strong>以下条款。</p>
+
+            <ul>
+                <li><strong>严禁盗用、P图及制作表情包：</strong> 禁止以任何形式（抠图、合成、添加文字等）处理<strong>非本人</strong>的照片。即使出于“玩笑”，也必须获得照片中<strong>所有出镜人</strong>的明确授权。</li>
+                <li><strong>肖像权与责任归属：</strong> 本人（相册整理者）仅提供分享平台，<strong>不承担</strong>因照片滥用、恶搞、传播引发的任何法律责任或纠纷。一切后果由<strong>实际制作者（行为人）</strong>自行承担。</li>
+                <li><strong>删除/撤回权利：</strong> 若您不希望某张照片公开，请 <strong>私聊联系我</strong> 并指明照片，我将在 24 小时内处理。逾期未联系则视为默认同意展示。</li>
+            </ul>
+
+            <div class="highlight-box">
+                <strong>⚠️ 特别警告：</strong> 任何未经允许的P图、传播或商业使用，均属侵权。行为人将独自承担法律、赔偿及校纪后果，与相册整理者无关。
+            </div>
+
+            <div class="legal-warning">
+                <span>⚖️ 免责声明</span>
+                <p><strong>本人不承担任何因照片滥用、盗用、恶搞引发的法律及心理伤害责任。</strong> 如有纠纷，请直接追究行为人，本人将配合提供必要日志，但绝不代为受过。</p>
+            </div>
+
+            <p style="margin-top: 6px; font-size: 0.9rem; color: #5d4b3d;"><strong>📌 转发/告知义务：</strong> 向他人转发相册链接或密码前，<strong>必须</strong>确保对方已知悉本协议全部内容。</p>
+        </div>
+    </div>
+
+    <!-- 密码提示区（未确认时可见密码，但相册链接隐藏） -->
+    <div class="secret-area">
+        <span class="label"><span>🔐 访问密码</span> <i>相册专用</i></span>
+        <span class="secret-code">WCBZG-5ms55</span>
+    </div>
+    <div class="secret-hint">⬇️ 阅读并确认协议后，下方将显示相册入口</div>
+
+    <!-- 确认按钮 -->
+    <button class="btn-confirm" id="confirmBtn">✅ 我已阅读并确认</button>
+
+    <!-- 相册链接 + 密码 (初始隐藏) -->
+    <div class="album-access" id="albumAccess">
+        <div class="link-row">
+            <a href="https://user.qzone.qq.com/263175043/photo/V54HDqQZ0TLkbt14fSkx383XqP1w4tLJ/" target="_blank" rel="noopener noreferrer">
+                📂 点击进入班级相册
+            </a>
+            <span class="copy-badge">QQ空间</span>
+        </div>
+        <div class="pwd-display">
+            <strong>🔑 密码</strong>
+            <span class="pwd-value">WCBZG-5ms55</span>
+        </div>
+        <div style="margin-top: 12px; font-size: 0.8rem; color: #5f4d3d; text-align: center; background: #ede3da; padding: 6px 12px; border-radius: 80px;">
+            ⚠️ 转发前请务必告知对方遵守本协议
+        </div>
+    </div>
+
+    <div class="footnote">
+        声明人：初三（X）班  ·  2026.07 ·  已阅即同意
+    </div>
+</div>
+
+<script>
+    (function() {
+        const confirmBtn = document.getElementById('confirmBtn');
+        const albumAccess = document.getElementById('albumAccess');
+
+        // 检查是否已经确认过（使用 sessionStorage 避免刷新后重复显示，但保留协议可见）
+        const alreadyConfirmed = sessionStorage.getItem('albumConfirmed') === 'true';
+
+        // 如果已经确认过，直接显示相册入口，并改变按钮状态
+        if (alreadyConfirmed) {
+            albumAccess.classList.add('show');
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = '✅ 已确认 · 相册已解锁';
+        }
+
+        // 点击确认按钮
+        confirmBtn.addEventListener('click', function() {
+            // 防止重复点击导致多次触发
+            if (this.disabled) return;
+
+            // 显示相册区域
+            albumAccess.classList.add('show');
+
+            // 禁用按钮，改变文字
+            this.disabled = true;
+            this.textContent = '✅ 已确认 · 相册已解锁';
+
+            // 存入 sessionStorage，刷新页面后仍然保持解锁状态 (直到关闭标签页)
+            sessionStorage.setItem('albumConfirmed', 'true');
+
+            // 可选：平滑滚动到相册入口
+            setTimeout(() => {
+                albumAccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 200);
+        });
+
+        // 附加：点击相册链接时，二次提醒（但不会阻止跳转）
+        const albumLink = document.querySelector('.album-access .link-row a');
+        if (albumLink) {
+            albumLink.addEventListener('click', function(e) {
+                // 仅做提醒，不阻止跳转
+                const userConfirmed = confirm('📢 提醒：转发相册或密码前，请务必确保对方已知悉“肖像权保护声明”。\n你确定要继续访问吗？');
+                if (!userConfirmed) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        // 键盘可访问性优化——回车触发按钮
+        confirmBtn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    })();
+</script>
+
+</body>
+</html>
